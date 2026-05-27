@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 — Elasticity & Welfare Economics | LB5229</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#1B3A6B;--navy-deep:#0F2347;--blue:#2563A8;--blue-mid:#3B82F6;
+  --blue-light:#DBEAFE;--blue-pale:#EFF6FF;--slate:#334155;--slate-mid:#64748B;
+  --slate-line:#E2E8F0;--cream:#F8FAFC;--white:#FFFFFF;--gold:#F59E0B;
+  --green:#059669;--green-light:#D1FAE5;--red:#DC2626;--red-light:#FEE2E2;
+  --teal:#0891B2;--teal-light:#CFFAFE;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--slate);line-height:1.7;}
+
+header{background:var(--navy);padding:56px 80px 48px;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(45deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;}
+.header-inner{position:relative;z-index:1;max-width:900px;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.breadcrumb a{color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:rgba(255,255,255,.2);}
+header h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,50px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:10px;}
+header h1 em{font-style:italic;color:var(--blue-light);}
+.header-sub{font-size:14px;color:rgba(219,234,254,.55);font-weight:300;}
+.header-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.htag{font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.08);color:var(--blue-light);}
+
+.toc-strip{background:var(--navy-deep);padding:0 80px;display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto;}
+.toc-item{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:14px 20px;white-space:nowrap;text-decoration:none;transition:all .2s;border-bottom:2px solid transparent;}
+.toc-item:hover{color:var(--gold);border-bottom-color:var(--gold);}
+
+main{max-width:900px;margin:0 auto;padding:56px 48px 80px;}
+.section{margin-bottom:60px;}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.step-badge{width:38px;height:38px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--white);flex-shrink:0;}
+.section-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--navy);}
+
+.concept-card{background:var(--white);border:1px solid var(--slate-line);border-radius:10px;padding:24px 28px;margin-bottom:16px;}
+.concept-card h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--navy);margin-bottom:10px;}
+.concept-card p,.concept-card li{font-size:14px;color:var(--slate);line-height:1.7;}
+.concept-card ul{padding-left:18px;margin-top:8px;}
+.concept-card li{margin-bottom:4px;}
+
+.big-idea{background:var(--blue-pale);border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:20px 24px;margin-bottom:20px;}
+.big-idea p{font-size:15px;color:var(--navy);line-height:1.65;}
+.big-idea strong{color:var(--blue);}
+
+.formula-box{background:var(--navy-deep);border-radius:10px;padding:20px 24px;margin:16px 0;}
+.formula-box .fl{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:.03em;line-height:1.8;}
+.formula-box .label{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;font-family:'DM Mono',monospace;}
+
+.example-box{background:var(--green-light);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:18px 22px;margin:16px 0;}
+.example-box p{font-size:14px;color:#065F46;line-height:1.65;}
+
+.worked-box{background:var(--teal-light);border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:18px 22px;margin:16px 0;}
+.worked-box p,.worked-box li{font-size:14px;color:#164e63;line-height:1.7;}
+.worked-box ul{padding-left:18px;}
+.worked-box li{margin-bottom:3px;}
+.worked-box strong{color:var(--teal);}
+
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px;}
+.data-table th{background:var(--navy);color:var(--white);padding:10px 14px;text-align:left;font-weight:600;font-size:12px;letter-spacing:.04em;}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--slate-line);color:var(--slate);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--blue-pale);}
+.data-table td strong{color:var(--navy);}
+
+.divider{height:1px;background:var(--slate-line);margin:48px 0;}
+
+/* ELASTICITY TYPE PILLS */
+.etype-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0;}
+.etype{border-radius:10px;padding:16px;text-align:center;}
+.etype .val{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--navy);}
+.etype .name{font-size:12px;font-weight:600;color:var(--navy);margin-top:4px;}
+.etype .desc{font-size:11px;color:var(--slate-mid);margin-top:4px;}
+.etype.e1{background:#FEF3C7;} .etype.e2{background:var(--blue-pale);}
+.etype.e3{background:var(--green-light);} .etype.e4{background:var(--red-light);} .etype.e5{background:var(--teal-light);}
+
+/* QUIZ */
+.quiz-section{background:var(--white);border-radius:14px;border:1px solid var(--slate-line);padding:40px;box-shadow:0 4px 32px rgba(27,58,107,.06);}
+.quiz-header{margin-bottom:32px;}
+.quiz-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+.quiz-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy);}
+.quiz-sub{font-size:14px;color:var(--slate-mid);margin-top:6px;}
+
+.q-block{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--slate-line);}
+.q-block:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.q-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--slate-mid);margin-bottom:8px;}
+.q-text{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:16px;line-height:1.5;}
+
+.options{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-radius:8px;border:1.5px solid var(--slate-line);cursor:pointer;transition:all .18s;background:var(--white);}
+.opt:hover{border-color:var(--blue);background:var(--blue-pale);}
+.opt.selected{border-color:var(--blue);background:var(--blue-pale);}
+.opt.correct{border-color:var(--green);background:var(--green-light);}
+.opt.wrong{border-color:var(--red);background:var(--red-light);}
+.opt-letter{width:26px;height:26px;border-radius:50%;background:var(--slate-line);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--slate);flex-shrink:0;transition:all .18s;}
+.opt.selected .opt-letter{background:var(--blue);color:var(--white);}
+.opt.correct .opt-letter{background:var(--green);color:var(--white);}
+.opt.wrong .opt-letter{background:var(--red);color:var(--white);}
+.opt-text{font-size:14px;color:var(--slate);line-height:1.5;padding-top:3px;}
+
+.q-feedback{margin-top:12px;padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.55;display:none;}
+.q-feedback.show{display:block;}
+.q-feedback.correct-fb{background:var(--green-light);color:#065F46;border-left:3px solid var(--green);}
+.q-feedback.wrong-fb{background:var(--red-light);color:#991B1B;border-left:3px solid var(--red);}
+
+.check-btn{margin-top:14px;background:var(--navy);color:var(--white);border:none;padding:10px 24px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:background .18s;}
+.check-btn:hover{background:var(--blue);}
+.check-btn:disabled{background:var(--slate-line);color:var(--slate-mid);cursor:default;}
+
+.score-bar{display:none;margin-top:32px;background:var(--navy);border-radius:12px;padding:28px 32px;text-align:center;}
+.score-bar.show{display:block;}
+.score-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--gold);}
+.score-label{font-size:14px;color:rgba(255,255,255,.6);margin-top:4px;}
+.score-msg{font-size:16px;color:var(--white);margin-top:12px;font-weight:500;}
+.retry-btn{margin-top:18px;background:var(--gold);color:var(--navy-deep);border:none;padding:10px 28px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;}
+
+.submit-all{width:100%;background:var(--blue);color:var(--white);border:none;padding:14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;margin-top:32px;transition:background .2s;}
+.submit-all:hover{background:var(--navy);}
+
+footer{background:var(--navy-deep);padding:26px 80px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.ft{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);}
+.ft a{color:rgba(255,255,255,.4);text-decoration:none;}
+.ft a:hover{color:var(--gold);}
+
+@media(max-width:680px){
+  header{padding:40px 24px 36px;}
+  main{padding:40px 20px 60px;}
+  .toc-strip{padding:0 20px;}
+  footer{padding:24px 24px;}
+  .etype-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">LB5229</a>
+      <span>/</span>
+      Week 2
+    </div>
+    <h1>Elasticity &amp; <em>Welfare Economics</em></h1>
+    <p class="header-sub">Elasticity · PED · PES · Midpoint Formula · Tax Incidence · Consumer & Producer Surplus · Deadweight Loss</p>
+    <div class="header-tags">
+      <span class="htag">Week 2</span>
+      <span class="htag">Ch. 5</span>
+      <span class="htag">Nievergelt (1983)</span>
+      <span class="htag">Assessment 1</span>
+    </div>
+  </div>
+</header>
+
+<div class="toc-strip">
+  <a href="#step1" class="toc-item">Micro vs Macro</a>
+  <a href="#step2" class="toc-item">Elasticity</a>
+  <a href="#step3" class="toc-item">PED</a>
+  <a href="#step4" class="toc-item">PES</a>
+  <a href="#step5" class="toc-item">Midpoint Formula</a>
+  <a href="#step6" class="toc-item">Tax & Welfare</a>
+  <a href="#step7" class="toc-item">Surplus</a>
+  <a href="#quiz" class="toc-item">Quiz</a>
+</div>
+
+<main>
+
+<!-- ── STEP 1: MICRO VS MACRO ── -->
+<section class="section" id="step1">
+  <div class="section-header">
+    <div class="step-badge">1</div>
+    <h2 class="section-title">Microeconomic Fundamentals</h2>
+  </div>
+  <div class="big-idea">
+    <p><strong>Economics</strong> is about balancing profit maximisation with sustainable resource management. Microeconomics focuses on the individual and firm level; macroeconomics looks at the national and international level.</p>
+  </div>
+  <div class="concept-card">
+    <h3>Supply and Demand as Core Models</h3>
+    <p>Supply and demand curves are the fundamental models for understanding how markets work. This week we build on those foundations to examine <strong>how responsive</strong> buyers and sellers are to price changes — the concept of elasticity.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 2: ELASTICITY ── -->
+<section class="section" id="step2">
+  <div class="section-header">
+    <div class="step-badge">2</div>
+    <h2 class="section-title">The Concept of Elasticity</h2>
+  </div>
+  <div class="big-idea">
+    <p><strong>Definition:</strong> Elasticity measures how much one variable changes in response to a change in another variable. It is about <em>responsiveness</em>.</p>
+  </div>
+  <div class="concept-card">
+    <h3>The Rubber Band Analogy</h3>
+    <p>Think of a rubber band: a highly elastic band stretches a lot in response to a small pull. A highly inelastic band barely stretches at all. Markets work the same way — some respond dramatically to price changes, others barely move.</p>
+    <div class="formula-box" style="margin-top:14px;">
+      <div class="label">General Formula</div>
+      <div class="fl">Elasticity (e) = % Change in Quantity ÷ % Change in Price</div>
+    </div>
+  </div>
+  <div class="concept-card">
+    <h3>Four Types of Elasticity</h3>
+    <table class="data-table">
+      <thead><tr><th>Type</th><th>Measures</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Price Elasticity of Demand (PED)</strong></td><td>How much quantity demanded changes when price changes</td></tr>
+        <tr><td><strong>Price Elasticity of Supply (PES)</strong></td><td>How much quantity supplied changes when price changes</td></tr>
+        <tr><td><strong>Cross-Price Elasticity of Demand</strong></td><td>How much demand for Good A changes when price of Good B changes</td></tr>
+        <tr><td><strong>Income Elasticity of Demand</strong></td><td>How much quantity demanded changes when consumer income changes</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 3: PED ── -->
+<section class="section" id="step3">
+  <div class="section-header">
+    <div class="step-badge">3</div>
+    <h2 class="section-title">Price Elasticity of Demand (PED)</h2>
+  </div>
+  <div class="big-idea">
+    <p><strong>Definition:</strong> PED measures the responsiveness of demand to a change in price.</p>
+  </div>
+  <div class="concept-card">
+    <div class="formula-box">
+      <div class="label">PED Formula</div>
+      <div class="fl">PED = % Change in Quantity Demanded ÷ % Change in Price</div>
+    </div>
+    <h3 style="margin-top:16px;">Types of Demand</h3>
+    <div class="etype-grid">
+      <div class="etype e1"><div class="val">PED > 1</div><div class="name">Elastic</div><div class="desc">Highly sensitive to price — luxury goods</div></div>
+      <div class="etype e2"><div class="val">PED < 1</div><div class="name">Inelastic</div><div class="desc">Less sensitive — necessities, addictive goods</div></div>
+      <div class="etype e3"><div class="val">PED = 1</div><div class="name">Unit Elastic</div><div class="desc">% change in Qd = % change in price</div></div>
+      <div class="etype e4"><div class="val">PED = 0</div><div class="name">Perfectly Inelastic</div><div class="desc">Demand doesn't change at all</div></div>
+      <div class="etype e5"><div class="val">PED = ∞</div><div class="name">Perfectly Elastic</div><div class="desc">Demand is infinitely responsive</div></div>
+    </div>
+  </div>
+  <div class="concept-card">
+    <h3>Factors Affecting PED</h3>
+    <table class="data-table">
+      <thead><tr><th>Factor</th><th>Effect on PED</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Availability of Substitutes</strong></td><td>More substitutes → more elastic demand</td></tr>
+        <tr><td><strong>Price Relative to Income</strong></td><td>Higher % of income → more elastic</td></tr>
+        <tr><td><strong>Cost of Switching</strong></td><td>High switching costs → inelastic demand</td></tr>
+        <tr><td><strong>Brand Loyalty</strong></td><td>Strong brand loyalty → inelastic demand</td></tr>
+        <tr><td><strong>Necessity vs Luxury</strong></td><td>Necessities → inelastic; Luxuries → elastic</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 4: PES ── -->
+<section class="section" id="step4">
+  <div class="section-header">
+    <div class="step-badge">4</div>
+    <h2 class="section-title">Price Elasticity of Supply (PES)</h2>
+  </div>
+  <div class="big-idea">
+    <p><strong>Definition:</strong> PES measures the responsiveness of supply to a change in price.</p>
+  </div>
+  <div class="concept-card">
+    <div class="formula-box">
+      <div class="label">PES Formula</div>
+      <div class="fl">PES = % Change in Quantity Supplied ÷ % Change in Price</div>
+    </div>
+    <h3 style="margin-top:16px;">Types of Supply</h3>
+    <div class="etype-grid">
+      <div class="etype e1"><div class="val">PES > 1</div><div class="name">Elastic</div><div class="desc">Supply highly responsive to price</div></div>
+      <div class="etype e2"><div class="val">PES < 1</div><div class="name">Inelastic</div><div class="desc">Supply not very responsive</div></div>
+      <div class="etype e4"><div class="val">PES = 0</div><div class="name">Perfectly Inelastic</div><div class="desc">Supply fixed regardless of price</div></div>
+      <div class="etype e5"><div class="val">PES = ∞</div><div class="name">Perfectly Elastic</div><div class="desc">Supply can change without any price change</div></div>
+    </div>
+  </div>
+  <div class="concept-card">
+    <h3>Factors Affecting PES</h3>
+    <table class="data-table">
+      <thead><tr><th>Factor</th><th>Effect on PES</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Spare Capacity</strong></td><td>More spare capacity → more elastic supply</td></tr>
+        <tr><td><strong>Stock Levels</strong></td><td>High stock levels → more elastic supply</td></tr>
+        <tr><td><strong>Production Time</strong></td><td>Shorter production times → more elastic supply</td></tr>
+        <tr><td><strong>Ease of Factor Substitution</strong></td><td>High ease → more elastic supply</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 5: MIDPOINT FORMULA ── -->
+<section class="section" id="step5">
+  <div class="section-header">
+    <div class="step-badge">5</div>
+    <h2 class="section-title">Midpoint Formula for Elasticity</h2>
+  </div>
+  <div class="big-idea">
+    <p><strong>Purpose:</strong> To calculate percentage changes in a consistent way when moving between two points on a curve. It avoids the problem of getting different answers depending on which direction you measure.</p>
+  </div>
+  <div class="concept-card">
+    <div class="formula-box">
+      <div class="label">Midpoint Formula — Step by Step</div>
+      <div class="fl">
+        ΔQ = Q2 − Q1 &nbsp;&nbsp;&nbsp; ΔP = P2 − P1<br>
+        Qavg = (Q1 + Q2) ÷ 2 &nbsp;&nbsp;&nbsp; Pavg = (P1 + P2) ÷ 2<br>
+        % ΔQ = (ΔQ ÷ Qavg) × 100%<br>
+        % ΔP = (ΔP ÷ Pavg) × 100%<br>
+        Elasticity = % ΔQ ÷ % ΔP
+      </div>
+    </div>
+  </div>
+  <div class="concept-card">
+    <h3>Worked Example 1 — PED Calculation</h3>
+    <p style="font-size:14px;margin-bottom:10px;">Price falls from <strong>$10 → $8</strong>. Quantity demanded rises from <strong>100 → 130</strong>.</p>
+    <div class="worked-box">
+      <ul>
+        <li>ΔQ = 130 − 100 = 30</li>
+        <li>ΔP = 8 − 10 = −2</li>
+        <li>Qavg = (100 + 130) ÷ 2 = 115</li>
+        <li>Pavg = (10 + 8) ÷ 2 = 9</li>
+        <li>% ΔQ = (30 ÷ 115) × 100 ≈ 26.09%</li>
+        <li>% ΔP = (−2 ÷ 9) × 100 ≈ −22.22%</li>
+        <li><strong>PED = 26.09 ÷ 22.22 ≈ 1.17 → Elastic (PED > 1)</strong></li>
+      </ul>
+    </div>
+    <h3 style="margin-top:16px;">Worked Example 2 — PES Calculation</h3>
+    <p style="font-size:14px;margin-bottom:10px;">Price rises from <strong>$20 → $22</strong>. Quantity supplied rises from <strong>200 → 210</strong>.</p>
+    <div class="worked-box">
+      <ul>
+        <li>ΔQ = 210 − 200 = 10</li>
+        <li>ΔP = 22 − 20 = 2</li>
+        <li>Qavg = (200 + 210) ÷ 2 = 205</li>
+        <li>Pavg = (20 + 22) ÷ 2 = 21</li>
+        <li>% ΔQ = (10 ÷ 205) × 100 ≈ 4.88%</li>
+        <li>% ΔP = (2 ÷ 21) × 100 ≈ 9.52%</li>
+        <li><strong>PES = 4.88 ÷ 9.52 ≈ 0.51 → Inelastic (PES < 1)</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 6: TAX & WELFARE ── -->
+<section class="section" id="step6">
+  <div class="section-header">
+    <div class="step-badge">6</div>
+    <h2 class="section-title">Elasticity, Taxation &amp; Tax Incidence</h2>
+  </div>
+  <div class="concept-card">
+    <h3>Tax Wedge &amp; Tax Revenue</h3>
+    <p><strong>Tax Wedge:</strong> The difference between the price consumers pay and the price producers receive after a tax is imposed.</p>
+    <p style="margin-top:8px;"><strong>Tax Revenue:</strong> Tax per unit × quantity sold after the tax.</p>
+    <p style="margin-top:8px;"><strong>Effect:</strong> Taxes shift the supply curve upward, leading to a new equilibrium with a higher consumer price and lower producer price — and lower quantity traded.</p>
+  </div>
+  <div class="concept-card">
+    <h3>Who Bears the Tax Burden?</h3>
+    <div class="big-idea" style="margin-bottom:0;">
+      <p><strong>Key Rule:</strong> The tax burden falls more heavily on the side of the market with the more <em>inelastic</em> curve.</p>
+    </div>
+    <table class="data-table" style="margin-top:14px;">
+      <thead><tr><th>Situation</th><th>Who Bears More of the Tax?</th><th>Why?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Inelastic Demand</strong></td><td>Consumers</td><td>They don't reduce consumption much when price rises</td></tr>
+        <tr><td><strong>Elastic Demand</strong></td><td>Producers</td><td>Producers can't pass tax on without losing too many sales</td></tr>
+        <tr><td><strong>Inelastic Supply</strong></td><td>Producers</td><td>They can't easily reduce supply in response to price fall</td></tr>
+        <tr><td><strong>Elastic Supply</strong></td><td>Consumers</td><td>Producers easily redirect resources; consumers absorb the tax</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="concept-card">
+    <h3>Policy Discussion — Which Goods Should Governments Tax?</h3>
+    <ul>
+      <li><strong>Maximum tax revenue:</strong> Tax goods with inelastic demand (e.g. petrol, tobacco, alcohol) — quantity sold doesn't fall much.</li>
+      <li><strong>Fairness of tax incidence:</strong> Consider who bears the burden — taxing inelastic goods hits lower-income consumers harder (regressive).</li>
+      <li><strong>Alternatives to taxes:</strong> Subsidies (encourage desired behaviour), regulations (cap harmful activity), tradeable permits — all avoid deadweight loss of taxation.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 7: SURPLUS & DWL ── -->
+<section class="section" id="step7">
+  <div class="section-header">
+    <div class="step-badge">7</div>
+    <h2 class="section-title">Welfare Economics — Surplus &amp; Deadweight Loss</h2>
+  </div>
+  <div class="concept-card">
+    <h3>Consumer Surplus</h3>
+    <p>The additional benefit consumers receive when they buy a good for <strong>less than they were willing to pay</strong>. On a graph: the triangular area between the demand curve and the actual market price.</p>
+  </div>
+  <div class="concept-card">
+    <h3>Producer Surplus</h3>
+    <p>The additional profit producers earn when they sell a good for <strong>more than their minimum acceptable price</strong>. On a graph: the triangular area between the supply curve and the actual market price.</p>
+  </div>
+  <div class="concept-card">
+    <h3>Deadweight Loss (DWL)</h3>
+    <p>The reduction in total economic surplus that occurs when a market is not operating efficiently — caused by taxes, price controls, or other market distortions. DWL represents trades that would have benefited both parties but did not occur.</p>
+    <div class="example-box" style="margin-top:12px;">
+      <p><strong>Smartphone example:</strong> Market price = $800. Consumers willing to pay up to $1,000. Consumer surplus = ($1,000 − $800) × quantity sold. If demand rises and price increases to $900, consumer surplus increases. If supply falls and price rises to $1,100, consumer surplus decreases.</p>
+    </div>
+  </div>
+  <div class="concept-card">
+    <h3>How Shifts Affect Surplus</h3>
+    <table class="data-table">
+      <thead><tr><th>Event</th><th>Consumer Surplus</th><th>Producer Surplus</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Increase in Demand</strong></td><td>Increases (more consumers benefit)</td><td>Increases (higher prices)</td></tr>
+        <tr><td><strong>Decrease in Demand</strong></td><td>May increase further (lower prices)</td><td>Decreases (lower prices)</td></tr>
+        <tr><td><strong>Increase in Supply</strong></td><td>Increases (lower prices)</td><td>May decrease (prices fall)</td></tr>
+        <tr><td><strong>Decrease in Supply</strong></td><td>Decreases (higher prices)</td><td>May increase (higher prices)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── KEY FORMULAS ── -->
+<section class="section">
+  <div class="section-header">
+    <div class="step-badge" style="background:var(--gold);color:var(--navy-deep);">📐</div>
+    <h2 class="section-title">Key Formulas Reference</h2>
+  </div>
+  <div class="concept-card">
+    <div class="formula-box">
+      <div class="label">All Week 2 Formulas</div>
+      <div class="fl">
+        PED = % ΔQd ÷ % ΔP<br>
+        PES = % ΔQs ÷ % ΔP<br>
+        Midpoint % ΔQ = (ΔQ ÷ Qavg) × 100%<br>
+        Midpoint % ΔP = (ΔP ÷ Pavg) × 100%<br>
+        Tax Revenue = Tax per unit × Quantity sold after tax<br>
+        Elastic: PED or PES > 1 &nbsp;|&nbsp; Inelastic: < 1 &nbsp;|&nbsp; Unit elastic: = 1
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── QUIZ ── -->
+<section id="quiz">
+  <div class="quiz-section">
+    <div class="quiz-header">
+      <div class="quiz-label">Week 2 — Self Assessment</div>
+      <div class="quiz-title">Multiple Choice Quiz</div>
+      <div class="quiz-sub">Select one answer per question, then click Check Answer. Submit all at the end to see your score.</div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-block" id="q1">
+      <div class="q-num">Question 1 of 10</div>
+      <div class="q-text">Country X can produce 200 coffee or 600 cocoa per day. Country Y can produce 100 coffee or 50 cocoa per day. Which statement is true?</div>
+      <div class="options">
+        <div class="opt" onclick="sel(1,'A')"><div class="opt-letter">A</div><div class="opt-text">Country Y has absolute advantage in both goods</div></div>
+        <div class="opt" onclick="sel(1,'B')"><div class="opt-letter">B</div><div class="opt-text">Country X has absolute advantage in both goods</div></div>
+        <div class="opt" onclick="sel(1,'C')"><div class="opt-letter">C</div><div class="opt-text">Country X has comparative advantage in coffee</div></div>
+        <div class="opt" onclick="sel(1,'D')"><div class="opt-letter">D</div><div class="opt-text">Country Y has comparative advantage in cocoa</div></div>
+      </div>
+      <div class="q-feedback" id="fb1"></div>
+      <button class="check-btn" onclick="chk(1,'B','Country X produces more of both goods per day (200 > 100 coffee; 600 > 50 cocoa) → absolute advantage in both.')">Check Answer</button>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-block" id="q2">
+      <div class="q-num">Question 2 of 10</div>
+      <div class="q-text">For Country X, the opportunity cost of producing 200 units of coffee is:</div>
+      <div class="options">
+        <div class="opt" onclick="sel(2,'A')"><div class="opt-letter">A</div><div class="opt-text">300 units of cocoa</div></div>
+        <div class="opt" onclick="sel(2,'B')"><div class="opt-letter">B</div><div class="opt-text">600 units of cocoa</div></div>
+        <div class="opt" onclick="sel(2,'C')"><div class="opt-letter">C</div><div class="opt-text">3 units of cocoa</div></div>
+        <div class="opt" onclick="sel(2,'D')"><div class="opt-letter">D</div><div class="opt-text">0 units of cocoa</div></div>
+      </div>
+      <div class="q-feedback" id="fb2"></div>
+      <button class="check-btn" onclick="chk(2,'B','Country X\'s PPF: 200 coffee OR 600 cocoa per day. To produce 200 coffee, it gives up all 600 units of cocoa it could have produced.')">Check Answer</button>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-block" id="q3">
+      <div class="q-num">Question 3 of 10</div>
+      <div class="q-text">True or False: Country Y has a comparative advantage in producing coffee.</div>
+      <div class="options">
+        <div class="opt" onclick="sel(3,'A')"><div class="opt-letter">A</div><div class="opt-text">True</div></div>
+        <div class="opt" onclick="sel(3,'B')"><div class="opt-letter">B</div><div class="opt-text">False</div></div>
+      </div>
+      <div class="q-feedback" id="fb3"></div>
+      <button class="check-btn" onclick="chk(3,'B','False. Country Y\'s opportunity cost of coffee = 50÷100 = 0.5 cocoa. Country X\'s = 600÷200 = 3 cocoa. Country X gives up LESS cocoa to produce coffee → Country X has comparative advantage in coffee, not Y.')">Check Answer</button>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-block" id="q4">
+      <div class="q-num">Question 4 of 10</div>
+      <div class="q-text">Which statement about price elasticity of demand is correct?</div>
+      <div class="options">
+        <div class="opt" onclick="sel(4,'A')"><div class="opt-letter">A</div><div class="opt-text">Price rises 5%, quantity demanded falls 10% → demand is inelastic</div></div>
+        <div class="opt" onclick="sel(4,'B')"><div class="opt-letter">B</div><div class="opt-text">Price falls 8%, quantity demanded rises 16% → demand is elastic</div></div>
+        <div class="opt" onclick="sel(4,'C')"><div class="opt-letter">C</div><div class="opt-text">Price rises 3%, quantity demanded falls 3% → demand is perfectly elastic</div></div>
+        <div class="opt" onclick="sel(4,'D')"><div class="opt-letter">D</div><div class="opt-text">Price rises 20%, quantity demanded unchanged → demand is unit elastic</div></div>
+      </div>
+      <div class="q-feedback" id="fb4"></div>
+      <button class="check-btn" onclick="chk(4,'B','PED = 16%÷8% = 2 > 1 → elastic. Option A gives PED = 10÷5 = 2 (elastic, not inelastic). Option C: PED = 1 is unit elastic, not perfectly elastic. Option D: PED = 0 is perfectly inelastic.')">Check Answer</button>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-block" id="q5">
+      <div class="q-num">Question 5 of 10</div>
+      <div class="q-text">A government imposes a binding price ceiling on renewable energy. What is the likely outcome?</div>
+      <div class="options">
+        <div class="opt" onclick="sel(5,'A')"><div class="opt-letter">A</div><div class="opt-text">Surplus</div></div>
+        <div class="opt" onclick="sel(5,'B')"><div class="opt-letter">B</div><div class="opt-text">Shortage</div></div>
+      </div>
+      <div class="q-feedback" id="fb5"></div>
+      <button class="check-btn" onclick="chk(5,'B','A binding price ceiling is set BELOW equilibrium → artificially low price → Qd > Qs → shortage. Consumers want more than producers will supply at that low price.')">Check Answer</button>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-block" id="q6">
+      <div class="q-num">Question 6 of 10</div>
+      <div class="q-text">If production technology improves in a market, which statement is correct?</div>
+      <div class="options">
+        <div class="opt" onclick="sel(6,'A')"><div class="opt-letter">A</div><div class="opt-text">The supply curve shifts to the right</div></div>
+        <div class="opt" onclick="sel(6,'B')"><div class="opt-letter">B</div><div class="opt-text">The demand curve shifts to the left</div></div>
+        <div class="opt" onclick="sel(6,'C')"><div class="opt-letter">C</div><div class="opt-text">Equilibrium quantity decreases</div></div>
+      </div>
+      <div class="q-feedback" id="fb6"></div>
+      <button class="check-btn" onclick="chk(6,'A','Better technology reduces production costs → more can be produced at every price → supply curve shifts rightward → lower equilibrium price and higher equilibrium quantity.')">Check Answer</button>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-block" id="q7">
+      <div class="q-num">Question 7 of 10</div>
+      <div class="q-text">"Subsidies for electric vehicles should be doubled to reduce carbon emissions." This is an example of:</div>
+      <div class="options">
+        <div class="opt" onclick="sel(7,'A')"><div class="opt-letter">A</div><div class="opt-text">A normative economic statement</div></div>
+        <div class="opt" onclick="sel(7,'B')"><div class="opt-letter">B</div><div class="opt-text">A positive economic statement</div></div>
+      </div>
+      <div class="q-feedback" id="fb7"></div>
+      <button class="check-btn" onclick="chk(7,'A','\"Should be doubled\" is a value judgement / policy recommendation → normative. Positive economics describes what IS; normative economics prescribes what SHOULD BE.')">Check Answer</button>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-block" id="q8">
+      <div class="q-num">Question 8 of 10</div>
+      <div class="q-text">Bottled water is considered a necessity. Which statement is true about its demand?</div>
+      <div class="options">
+        <div class="opt" onclick="sel(8,'A')"><div class="opt-letter">A</div><div class="opt-text">The demand for bottled water is more likely to be elastic</div></div>
+        <div class="opt" onclick="sel(8,'B')"><div class="opt-letter">B</div><div class="opt-text">The demand for bottled water is more likely to be inelastic</div></div>
+      </div>
+      <div class="q-feedback" id="fb8"></div>
+      <button class="check-btn" onclick="chk(8,'B','Necessities have inelastic demand — consumers continue buying them even when prices rise because they cannot easily go without them.')">Check Answer</button>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-block" id="q9">
+      <div class="q-num">Question 9 of 10</div>
+      <div class="q-text">Organic milk price rises from $4 to $6. Quantity demanded falls from 100 to 80 litres. Using the midpoint formula, the PED is approximately:</div>
+      <div class="options">
+        <div class="opt" onclick="sel(9,'A')"><div class="opt-letter">A</div><div class="opt-text">0.67</div></div>
+        <div class="opt" onclick="sel(9,'B')"><div class="opt-letter">B</div><div class="opt-text">1.25</div></div>
+        <div class="opt" onclick="sel(9,'C')"><div class="opt-letter">C</div><div class="opt-text">2.5</div></div>
+        <div class="opt" onclick="sel(9,'D')"><div class="opt-letter">D</div><div class="opt-text">0.5</div></div>
+      </div>
+      <div class="q-feedback" id="fb9"></div>
+      <button class="check-btn" onclick="chk(9,'A','ΔQ = −20, Qavg = 90 → % ΔQ = 22.2%. ΔP = 2, Pavg = 5 → % ΔP = 40%. PED = 22.2÷40 = 0.67. Since PED < 1, demand is inelastic.')">Check Answer</button>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-block" id="q10">
+      <div class="q-num">Question 10 of 10</div>
+      <div class="q-text">A tax is placed on solar panels. Supply is highly elastic; demand is inelastic. Who bears the greater tax burden?</div>
+      <div class="options">
+        <div class="opt" onclick="sel(10,'A')"><div class="opt-letter">A</div><div class="opt-text">Consumers — because their demand is relatively inelastic</div></div>
+        <div class="opt" onclick="sel(10,'B')"><div class="opt-letter">B</div><div class="opt-text">Producers — because their supply is elastic</div></div>
+      </div>
+      <div class="q-feedback" id="fb10"></div>
+      <button class="check-btn" onclick="chk(10,'A','The tax burden falls on the more inelastic side. Demand is inelastic (consumers don\'t reduce quantity much when price rises) → consumers absorb most of the tax. Elastic supply means producers easily reduce production and pass the cost on.')">Check Answer</button>
+    </div>
+
+    <button class="submit-all" onclick="submitAll()">Submit All &amp; See Score</button>
+    <div class="score-bar" id="scoreBar">
+      <div class="score-num" id="scoreNum">0/10</div>
+      <div class="score-label">questions correct</div>
+      <div class="score-msg" id="scoreMsg"></div>
+      <button class="retry-btn" onclick="retryQuiz()">Try Again</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="ft"><a href="week1.html">← Week 1</a></div>
+  <div class="ft">LB5229 · Week 2 · Economics for a Sustainable World</div>
+  <div class="ft"><a href="../index.html">Subject home →</a></div>
+</footer>
+
+<script>
+const answers = {};
+const correct = {1:'B',2:'B',3:'B',4:'B',5:'B',6:'A',7:'A',8:'B',9:'A',10:'A'};
+
+function sel(q, letter) {
+  const block = document.getElementById('q'+q);
+  block.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  const letters = ['A','B','C','D'];
+  block.querySelectorAll('.opt').forEach((o,i) => { if(letters[i]===letter) o.classList.add('selected'); });
+  answers[q] = letter;
+}
+
+function chk(q, ans, explanation) {
+  if (!answers[q]) { alert('Please select an answer first.'); return; }
+  const block = document.getElementById('q'+q);
+  const opts = block.querySelectorAll('.opt');
+  const letters = ['A','B','C','D'];
+  const fb = document.getElementById('fb'+q);
+  const btn = block.querySelector('.check-btn');
+  opts.forEach((o,i) => {
+    o.classList.remove('selected');
+    if (letters[i] === ans) o.classList.add('correct');
+    else if (letters[i] === answers[q] && answers[q] !== ans) o.classList.add('wrong');
+    o.style.pointerEvents = 'none';
+  });
+  const ok = answers[q] === ans;
+  fb.className = 'q-feedback show ' + (ok ? 'correct-fb' : 'wrong-fb');
+  fb.innerHTML = (ok ? '✓ Correct! ' : '✗ Incorrect. Correct answer: <strong>'+ans+'</strong>. ') + explanation;
+  btn.disabled = true;
+}
+
+function submitAll() {
+  let score = 0;
+  for(let q=1;q<=10;q++){ if(answers[q] === correct[q]) score++; }
+  const bar = document.getElementById('scoreBar');
+  bar.classList.add('show');
+  document.getElementById('scoreNum').textContent = score+'/10';
+  const pct = Math.round(score/10*100);
+  let msg = pct >= 90 ? '🏆 Outstanding — excellent understanding of Week 2 concepts!'
+           : pct >= 60 ? '👍 Good effort — review any incorrect answers and revisit the elasticity formulas.'
+           : '📚 Keep studying — focus on the midpoint formula and tax incidence rules.';
+  document.getElementById('scoreMsg').textContent = msg;
+  bar.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  for(let q=1;q<=10;q++){
+    const block = document.getElementById('q'+q);
+    block.querySelectorAll('.opt').forEach(o => { o.className='opt'; o.style.pointerEvents=''; });
+    const fb = document.getElementById('fb'+q);
+    fb.className = 'q-feedback'; fb.innerHTML = '';
+    block.querySelector('.check-btn').disabled = false;
+  }
+  document.getElementById('scoreBar').classList.remove('show');
+  window.scrollTo({top:document.getElementById('quiz').offsetTop-40,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
