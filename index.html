@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LB5229 — Economics for a Sustainable World</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #1B3A6B;
+  --navy-deep:  #0F2347;
+  --blue:       #2563A8;
+  --blue-light: #DBEAFE;
+  --blue-pale:  #EFF6FF;
+  --slate:      #334155;
+  --slate-mid:  #64748B;
+  --slate-line: #E2E8F0;
+  --cream:      #F8FAFC;
+  --white:      #FFFFFF;
+  --gold:       #F59E0B;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--slate);
+  min-height: 100vh;
+}
+
+/* ── HEADER ─────────────────────────── */
+header {
+  background: var(--navy);
+  padding: 64px 80px 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(135deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(45deg,  rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+
+.header-inner { position: relative; z-index: 1; max-width: 860px; }
+
+.subject-code {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.subject-code::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+  max-width: 120px;
+}
+
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4.5vw, 54px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+header h1 em {
+  font-style: italic;
+  color: var(--blue-light);
+}
+
+.header-sub {
+  font-size: 14px;
+  color: rgba(219,234,254,0.6);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+/* ── MAIN ───────────────────────────── */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 64px 48px 80px;
+}
+
+.weeks-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--slate-mid);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.weeks-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--slate-line);
+}
+
+/* ── WEEK LIST ──────────────────────── */
+.week-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--slate-line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 24px rgba(27,58,107,0.06);
+}
+
+.week-row {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  align-items: center;
+  gap: 0;
+  background: var(--white);
+  border-bottom: 1px solid var(--slate-line);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.18s ease;
+  position: relative;
+}
+.week-row:last-child { border-bottom: none; }
+.week-row:hover { background: var(--blue-pale); }
+.week-row:hover .week-arrow { opacity: 1; transform: translateX(3px); }
+
+/* left number column */
+.week-num {
+  padding: 24px 0 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-right: 1px solid var(--slate-line);
+}
+.week-num .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+}
+.week-num .lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--slate-mid);
+}
+
+/* centre content */
+.week-body {
+  padding: 22px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.week-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.3;
+}
+.week-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+.topic-pill {
+  font-size: 11px;
+  background: var(--blue-pale);
+  color: var(--blue);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.week-reading {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--slate-mid);
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+
+/* right arrow */
+.week-arrow {
+  padding: 0 28px;
+  font-size: 16px;
+  color: var(--blue);
+  opacity: 0.3;
+  transition: opacity 0.18s, transform 0.18s;
+}
+
+/* current week highlight */
+.week-row.current {
+  background: var(--navy);
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+.week-row.current:hover { background: #1e4070; }
+.week-row.current .week-num { border-right-color: rgba(255,255,255,0.1); }
+.week-row.current .week-num .num { color: var(--gold); }
+.week-row.current .week-num .lbl { color: rgba(255,255,255,0.35); }
+.week-row.current .week-title { color: var(--white); }
+.week-row.current .topic-pill { background: rgba(255,255,255,0.1); color: var(--blue-light); }
+.week-row.current .week-reading { color: rgba(255,255,255,0.35); }
+.week-row.current .week-arrow { color: var(--gold); opacity: 0.7; }
+.week-row.current .current-tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: #0F2347;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* recess row */
+.week-row.recess {
+  background: var(--cream);
+  cursor: default;
+  pointer-events: none;
+}
+.week-row.recess .week-num .num { color: var(--slate-mid); opacity: 0.45; }
+.week-row.recess .week-title { color: var(--slate-mid); font-style: italic; font-family: 'DM Sans',sans-serif; font-size:14px; font-weight:400; }
+.week-row.recess .week-arrow { display: none; }
+
+/* ── FOOTER ─────────────────────────── */
+footer {
+  background: var(--navy-deep);
+  padding: 28px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.footer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+}
+.footer-code {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ── RESPONSIVE ─────────────────────── */
+@media (max-width: 680px) {
+  header { padding: 44px 28px 40px; }
+  main { padding: 44px 20px 60px; }
+  .week-row { grid-template-columns: 76px 1fr 36px; }
+  .week-num { padding: 18px 0 18px 18px; }
+  .week-body { padding: 18px 16px; }
+  .week-arrow { padding: 0 14px; }
+  footer { padding: 24px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="subject-code">LB5229 &nbsp;·&nbsp; James Cook University</div>
+    <h1>Economics for<br><em>a Sustainable World</em></h1>
+    <p class="header-sub">College of Business, Law &amp; Governance &nbsp;·&nbsp; Trimester 2, 2026 &nbsp;·&nbsp; 3 credit points</p>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <div class="weeks-label">Weekly notes &nbsp;— weeks 1 to 10</div>
+
+  <div class="week-list">
+
+    <!-- Week 1 -->
+    <a href="week1/index.html" class="week-row">
+      <div class="week-num">
+        <span class="num">01</span>
+        <span class="lbl">Week</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">Foundations — Trade, Supply &amp; Demand</div>
+        <div class="week-topics">
+          <span class="topic-pill">Opportunity cost</span>
+          <span class="topic-pill">Economic profit</span>
+          <span class="topic-pill">Comparative advantage</span>
+          <span class="topic-pill">Supply &amp; demand</span>
+        </div>
+        <div class="week-reading">Ch. 1–4 &nbsp;·&nbsp; Solow (1985)</div>
+      </div>
+      <div class="week-arrow">→</div>
+    </a>
+
+    <!-- Week 2 -->
+    <a href="week2/index.html" class="week-row">
+      <div class="week-num">
+        <span class="num">02</span>
+        <span class="lbl">Week</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">Elasticity, Tax Revenue &amp; Burden</div>
+        <div class="week-topics">
+          <span class="topic-pill">Price elasticity</span>
+          <span class="topic-pill">Tax incidence</span>
+          <span class="topic-pill">Deadweight loss</span>
+          <span class="topic-pill">Tax policy</span>
+        </div>
+        <div class="week-reading">Ch. 5 &nbsp;·&nbsp; Nievergelt (1983)</div>
+      </div>
+      <div class="week-arrow">→</div>
+    </a>
+
+    <!-- Week 3 -->
+    <a href="week3/index.html" class="week-row">
+      <div class="week-num">
+        <span class="num">03</span>
+        <span class="lbl">Week</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">No-Arbitrage &amp; Optimal Use of Resources</div>
+        <div class="week-topics">
+          <span class="topic-pill">No-arbitrage</span>
+          <span class="topic-pill">Resource optimisation</span>
+          <span class="topic-pill">Economic profit</span>
+        </div>
+        <div class="week-reading">Ch. 6 &nbsp;·&nbsp; Hörner &amp; Kamien (2004)</div>
+      </div>
+      <div class="week-arrow">→</div>
+    </a>
+
+    <!-- Week 4 — CURRENT -->
+    <a href="week4/index.html" class="week-row current">
+      <div class="week-num">
+        <span class="num">04</span>
+        <span class="lbl">Week</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">
+          Market Structures, Game Theory &amp; Regulation
+          <span class="current-tag">Current</span>
+        </div>
+        <div class="week-topics">
+          <span class="topic-pill">Perfect competition</span>
+          <span class="topic-pill">Monopoly</span>
+          <span class="topic-pill">Game theory</span>
+          <span class="topic-pill">Markets vs regulation</span>
+        </div>
+        <div class="week-reading">Ch. 7–9 &nbsp;·&nbsp; Ely &amp; Välimäki (2002) &nbsp;·&nbsp; Assessment 1 due</div>
+      </div>
+      <div class="week-arrow">→</div>
+    </a>
+
+    <!-- Week 5 -->
+    <a href="week5/index.html" class="week-row">
+      <div class="week-num">
+        <span class="num">05</span>
+        <span class="lbl">Week</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">Market Failure, Externalities &amp; Carbon Policy</div>
+        <div class="week-topics">
+          <span class="topic-pill">Market failure</span>
+          <span class="topic-pill">Externalities</span>
+          <span class="topic-pill">Carbon policy</span>
+          <span class="topic-pill">Information asymmetry</span>
+        </div>
+        <div class="week-reading">Ch. 4.3, 10 &nbsp;·&nbsp; Akerlof (1978)</div>
+      </div>
+      <div class="week-arrow">→</div>
+    </a>
+
+    <!-- Lecture Recess -->
+    <div class="week-row recess">
+      <div class="week-num">
+        <span class="num">—</span>
+        <span class="lbl">Recess</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">Lecture Recess</div>
+      </div>
+    </div>
+
+    <!-- Week 6 -->
+    <a href="week6/index.html" class="week-row">
+      <div class="week-num">
+        <span class="num">06</span>
+        <span class="lbl">Week</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">GDP, Circular Flow &amp; Sustainable Growth</div>
+        <div class="week-topics">
+          <span class="topic-pill">GDP &amp; circular flow</span>
+          <span class="topic-pill">Macro goals</span>
+          <span class="topic-pill">Balance of payments</span>
+          <span class="topic-pill">Income inequality</span>
+        </div>
+        <div class="week-reading">Ch. 11–12 &nbsp;·&nbsp; Binswanger (2009)</div>
+      </div>
+      <div class="week-arrow">→</div>
+    </a>
+
+    <!-- Week 7 -->
+    <a href="week7/index.html" class="week-row">
+      <div class="week-num">
+        <span class="num">07</span>
+        <span class="lbl">Week</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">Inflation, Unemployment &amp; the Phillips Curve</div>
+        <div class="week-topics">
+          <span class="topic-pill">Inflation</span>
+          <span class="topic-pill">Unemployment</span>
+          <span class="topic-pill">Phillips curve</span>
+          <span class="topic-pill">Policy targets</span>
+        </div>
+        <div class="week-reading">Ch. 13 &nbsp;·&nbsp; Schmitt-Grohé &amp; Uribe (2004)</div>
+      </div>
+      <div class="week-arrow">→</div>
+    </a>
+
+    <!-- Week 8 -->
+    <a href="week8/index.html" class="week-row">
+      <div class="week-num">
+        <span class="num">08</span>
+        <span class="lbl">Week</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">Fiscal Policy, Monetary Policy &amp; the Multiplier</div>
+        <div class="week-topics">
+          <span class="topic-pill">Fiscal policy</span>
+          <span class="topic-pill">Monetary policy</span>
+          <span class="topic-pill">Cash rate</span>
+          <span class="topic-pill">Multiplier effect</span>
+        </div>
+        <div class="week-reading">Ch. 14–15 &nbsp;·&nbsp; Benartzi &amp; Thaler (1995) &nbsp;·&nbsp; Assessment 2 due</div>
+      </div>
+      <div class="week-arrow">→</div>
+    </a>
+
+    <!-- Week 9 -->
+    <a href="week9/index.html" class="week-row">
+      <div class="week-num">
+        <span class="num">09</span>
+        <span class="lbl">Week</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">Expansionary &amp; Contractionary Policy, Bond Markets</div>
+        <div class="week-topics">
+          <span class="topic-pill">Automatic stabilisers</span>
+          <span class="topic-pill">Policy curves</span>
+          <span class="topic-pill">Bond pricing</span>
+          <span class="topic-pill">Interest rate signals</span>
+        </div>
+        <div class="week-reading">Ch. 16–19 &nbsp;·&nbsp; Binswanger (2009)</div>
+      </div>
+      <div class="week-arrow">→</div>
+    </a>
+
+    <!-- Week 10 -->
+    <a href="week10/index.html" class="week-row">
+      <div class="week-num">
+        <span class="num">10</span>
+        <span class="lbl">Week</span>
+      </div>
+      <div class="week-body">
+        <div class="week-title">Trade, Exchange Rates &amp; Financial Crises</div>
+        <div class="week-topics">
+          <span class="topic-pill">International trade</span>
+          <span class="topic-pill">Exchange rates</span>
+          <span class="topic-pill">Purchasing power parity</span>
+          <span class="topic-pill">Financial crises</span>
+        </div>
+        <div class="week-reading">Ch. 18–19 &nbsp;·&nbsp; Gruen &amp; Wilkinson (1994) &nbsp;·&nbsp; Assessment 3 due</div>
+      </div>
+      <div class="week-arrow">→</div>
+    </a>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-title">LB5229 — Economics for a Sustainable World</div>
+  <div class="footer-code">JCU &nbsp;·&nbsp; Trimester 2, 2026 &nbsp;·&nbsp; APA 7</div>
+</footer>
+
+</body>
+</html>
