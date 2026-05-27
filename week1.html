@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 — Foundations of Economics | LB5229</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#1B3A6B;--navy-deep:#0F2347;--blue:#2563A8;--blue-mid:#3B82F6;
+  --blue-light:#DBEAFE;--blue-pale:#EFF6FF;--slate:#334155;--slate-mid:#64748B;
+  --slate-line:#E2E8F0;--cream:#F8FAFC;--white:#FFFFFF;--gold:#F59E0B;
+  --green:#059669;--green-light:#D1FAE5;--red:#DC2626;--red-light:#FEE2E2;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--slate);line-height:1.7;}
+
+/* ── HEADER ── */
+header{background:var(--navy);padding:56px 80px 48px;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(45deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;}
+.header-inner{position:relative;z-index:1;max-width:900px;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.breadcrumb a{color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:rgba(255,255,255,.2);}
+header h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,50px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:10px;}
+header h1 em{font-style:italic;color:var(--blue-light);}
+.header-sub{font-size:14px;color:rgba(219,234,254,.55);font-weight:300;}
+.header-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.htag{font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.08);color:var(--blue-light);}
+
+/* ── NAV DOTS ── */
+.toc-strip{background:var(--navy-deep);padding:0 80px;display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto;}
+.toc-item{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:14px 20px;white-space:nowrap;text-decoration:none;transition:all .2s;border-bottom:2px solid transparent;}
+.toc-item:hover{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* ── MAIN ── */
+main{max-width:900px;margin:0 auto;padding:56px 48px 80px;}
+
+/* ── SECTION ── */
+.section{margin-bottom:60px;}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.step-badge{width:38px;height:38px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--white);flex-shrink:0;}
+.section-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--navy);}
+
+/* ── CARDS ── */
+.concept-card{background:var(--white);border:1px solid var(--slate-line);border-radius:10px;padding:24px 28px;margin-bottom:16px;}
+.concept-card h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--navy);margin-bottom:10px;}
+.concept-card p,.concept-card li{font-size:14px;color:var(--slate);line-height:1.7;}
+.concept-card ul{padding-left:18px;margin-top:8px;}
+.concept-card li{margin-bottom:4px;}
+
+.big-idea{background:var(--blue-pale);border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:20px 24px;margin-bottom:20px;}
+.big-idea p{font-size:15px;color:var(--navy);line-height:1.65;}
+.big-idea strong{color:var(--blue);}
+
+.formula-box{background:var(--navy-deep);border-radius:10px;padding:20px 24px;margin:16px 0;}
+.formula-box .fl{font-family:'DM Mono',monospace;font-size:14px;color:var(--gold);letter-spacing:.04em;}
+.formula-box .label{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;font-family:'DM Mono',monospace;}
+
+.example-box{background:var(--green-light);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:18px 22px;margin:16px 0;}
+.example-box p{font-size:14px;color:#065F46;line-height:1.65;}
+
+/* ── TABLE ── */
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px;}
+.data-table th{background:var(--navy);color:var(--white);padding:10px 14px;text-align:left;font-weight:600;font-size:12px;letter-spacing:.04em;}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--slate-line);color:var(--slate);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--blue-pale);}
+.data-table td strong{color:var(--navy);}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--slate-line);margin:48px 0;}
+
+/* ── QUIZ SECTION ── */
+.quiz-section{background:var(--white);border-radius:14px;border:1px solid var(--slate-line);padding:40px;box-shadow:0 4px 32px rgba(27,58,107,.06);}
+.quiz-header{margin-bottom:32px;}
+.quiz-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+.quiz-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy);}
+.quiz-sub{font-size:14px;color:var(--slate-mid);margin-top:6px;}
+
+.q-block{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--slate-line);}
+.q-block:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.q-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--slate-mid);margin-bottom:8px;}
+.q-text{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:16px;line-height:1.5;}
+
+.options{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-radius:8px;border:1.5px solid var(--slate-line);cursor:pointer;transition:all .18s;background:var(--white);}
+.opt:hover{border-color:var(--blue);background:var(--blue-pale);}
+.opt.selected{border-color:var(--blue);background:var(--blue-pale);}
+.opt.correct{border-color:var(--green);background:var(--green-light);}
+.opt.wrong{border-color:var(--red);background:var(--red-light);}
+.opt-letter{width:26px;height:26px;border-radius:50%;background:var(--slate-line);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--slate);flex-shrink:0;transition:all .18s;}
+.opt.selected .opt-letter{background:var(--blue);color:var(--white);}
+.opt.correct .opt-letter{background:var(--green);color:var(--white);}
+.opt.wrong .opt-letter{background:var(--red);color:var(--white);}
+.opt-text{font-size:14px;color:var(--slate);line-height:1.5;padding-top:3px;}
+
+.q-feedback{margin-top:12px;padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.55;display:none;}
+.q-feedback.show{display:block;}
+.q-feedback.correct-fb{background:var(--green-light);color:#065F46;border-left:3px solid var(--green);}
+.q-feedback.wrong-fb{background:var(--red-light);color:#991B1B;border-left:3px solid var(--red);}
+
+.check-btn{margin-top:14px;background:var(--navy);color:var(--white);border:none;padding:10px 24px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:background .18s;}
+.check-btn:hover{background:var(--blue);}
+.check-btn:disabled{background:var(--slate-line);color:var(--slate-mid);cursor:default;}
+
+/* ── SCORE ── */
+.score-bar{display:none;margin-top:32px;background:var(--navy);border-radius:12px;padding:28px 32px;text-align:center;}
+.score-bar.show{display:block;}
+.score-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--gold);}
+.score-label{font-size:14px;color:rgba(255,255,255,.6);margin-top:4px;}
+.score-msg{font-size:16px;color:var(--white);margin-top:12px;font-weight:500;}
+.retry-btn{margin-top:18px;background:var(--gold);color:var(--navy-deep);border:none;padding:10px 28px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;}
+
+/* ── SUBMIT ALL BTN ── */
+.submit-all{width:100%;background:var(--blue);color:var(--white);border:none;padding:14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;margin-top:32px;transition:background .2s;letter-spacing:.02em;}
+.submit-all:hover{background:var(--navy);}
+
+/* ── FOOTER ── */
+footer{background:var(--navy-deep);padding:26px 80px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.ft{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);}
+.ft a{color:rgba(255,255,255,.4);text-decoration:none;}
+.ft a:hover{color:var(--gold);}
+
+@media(max-width:680px){
+  header{padding:40px 24px 36px;}
+  main{padding:40px 20px 60px;}
+  .toc-strip{padding:0 20px;}
+  footer{padding:24px 24px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">LB5229</a>
+      <span>/</span>
+      Week 1
+    </div>
+    <h1>Foundations of <em>Economics</em></h1>
+    <p class="header-sub">Scarcity · Demand · Supply · Equilibrium · Trade · Macro vs Micro · Economic Shocks</p>
+    <div class="header-tags">
+      <span class="htag">Week 1</span>
+      <span class="htag">Ch. 1–4</span>
+      <span class="htag">Solow (1985)</span>
+      <span class="htag">Assessment 1</span>
+    </div>
+  </div>
+</header>
+
+<div class="toc-strip">
+  <a href="#step1" class="toc-item">Scarcity</a>
+  <a href="#step2" class="toc-item">Demand</a>
+  <a href="#step3" class="toc-item">Supply</a>
+  <a href="#step4" class="toc-item">Equilibrium</a>
+  <a href="#step5" class="toc-item">Trade</a>
+  <a href="#step6" class="toc-item">Micro vs Macro</a>
+  <a href="#step7" class="toc-item">Shocks</a>
+  <a href="#quiz" class="toc-item">Quiz</a>
+</div>
+
+<main>
+
+<!-- ── STEP 1: SCARCITY ── -->
+<section class="section" id="step1">
+  <div class="section-header">
+    <div class="step-badge">1</div>
+    <h2 class="section-title">Scarcity & Core Concepts</h2>
+  </div>
+
+  <div class="big-idea">
+    <p><strong>Big Idea:</strong> Economics is the study of how individuals, businesses, and governments allocate scarce resources to satisfy unlimited wants and needs. Because we cannot have everything, we must choose — and every choice has a cost.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>The Three Fundamental Questions</h3>
+    <table class="data-table">
+      <thead><tr><th>Question</th><th>Meaning</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>WHAT to produce?</strong></td><td>Which goods and services should be made?</td><td>Cars or hospitals?</td></tr>
+        <tr><td><strong>HOW to produce?</strong></td><td>Which resources and methods to use?</td><td>Labour-intensive or automated?</td></tr>
+        <tr><td><strong>FOR WHOM?</strong></td><td>Who receives the goods produced?</td><td>By price, need, or lottery?</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="concept-card">
+    <h3>Opportunity Cost</h3>
+    <p>The value of the next-best alternative sacrificed when a decision is made. It captures what you give up — not just what you spend.</p>
+    <div class="formula-box">
+      <div class="label">Formula</div>
+      <div class="fl">Opportunity Cost = Value of Next-Best Alternative Foregone</div>
+    </div>
+    <div class="example-box">
+      <p><strong>Example:</strong> You spend an evening studying instead of working a shift. Your opportunity cost is the income from the shift you skipped.</p>
+    </div>
+    <p style="margin-top:14px;font-size:14px;"><strong>PPF (Production Possibilities Frontier):</strong> Points ON the curve = efficient. Points INSIDE = inefficient (resources wasted). Points OUTSIDE = currently unattainable.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>Economic vs Accounting Profit</h3>
+    <table class="data-table">
+      <thead><tr><th>Concept</th><th>Formula</th><th>Includes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Accounting Profit</strong></td><td>Revenue − Explicit Costs</td><td>Only cash/visible costs</td></tr>
+        <tr><td><strong>Economic Profit</strong></td><td>Revenue − Explicit − Implicit Costs</td><td>All costs including foregone alternatives</td></tr>
+        <tr><td><strong>Normal Profit</strong></td><td>Economic Profit = 0</td><td>Firm covers all costs; competitive market outcome</td></tr>
+      </tbody>
+    </table>
+    <div class="formula-box" style="margin-top:14px;">
+      <div class="label">Key Formula</div>
+      <div class="fl">Economic Profit = Total Revenue − Explicit Costs − Implicit Costs</div>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Other Core Concepts</h3>
+    <table class="data-table">
+      <thead><tr><th>Concept</th><th>Definition</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Thinking at the Margin</strong></td><td>Evaluating the impact of producing or consuming ONE more unit</td></tr>
+        <tr><td><strong>Ceteris Paribus</strong></td><td>All other variables held constant during analysis</td></tr>
+        <tr><td><strong>Positive Economics</strong></td><td>Factual, testable statements about how the world IS — e.g. "Unemployment is 5%"</td></tr>
+        <tr><td><strong>Normative Economics</strong></td><td>Value judgements about how the world SHOULD be — e.g. "Unemployment should be lower"</td></tr>
+        <tr><td><strong>Sustainability</strong></td><td>Using resources responsibly for current and future generations</td></tr>
+      </tbody>
+    </table>
+    <div class="example-box" style="margin-top:12px;">
+      <p><strong>Remember:</strong> Positive economics = FACTS. Normative economics = OPINIONS. Always identify which type a statement is before analysing it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 2: DEMAND ── -->
+<section class="section" id="step2">
+  <div class="section-header">
+    <div class="step-badge">2</div>
+    <h2 class="section-title">Demand — What Buyers Do</h2>
+  </div>
+  <div class="big-idea">
+    <p><strong>Definition:</strong> Demand is the quantity of a good or service that buyers are willing AND able to purchase at various prices, within a given time period. Demand only counts when backed by purchasing power (effective demand).</p>
+  </div>
+  <div class="concept-card">
+    <h3>Law of Demand</h3>
+    <p>As price rises → quantity demanded falls. As price falls → quantity demanded rises. This is an <strong>inverse relationship</strong>.</p>
+    <table class="data-table" style="margin-top:14px;">
+      <thead><tr><th>Reason</th><th>Explanation</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Substitution Effect</strong></td><td>When price falls, consumers switch from more expensive alternatives</td></tr>
+        <tr><td><strong>Income Effect</strong></td><td>A lower price increases consumers' real purchasing power</td></tr>
+        <tr><td><strong>Diminishing Marginal Utility</strong></td><td>Each extra unit consumed delivers less satisfaction; consumers pay less for additional units</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="concept-card">
+    <h3>Movements vs Shifts</h3>
+    <table class="data-table">
+      <thead><tr><th>Type</th><th>Caused By</th><th>Effect on Graph</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Movement along the curve</strong></td><td>Change in the product's own PRICE</td><td>Point moves up or down the same curve</td></tr>
+        <tr><td><strong>Extension of Demand</strong></td><td>Price FALLS</td><td>Movement down-right along curve</td></tr>
+        <tr><td><strong>Contraction of Demand</strong></td><td>Price RISES</td><td>Movement up-left along curve</td></tr>
+        <tr><td><strong>Shift RIGHT (increase)</strong></td><td>Non-price factor improves demand</td><td>Entire curve moves RIGHT</td></tr>
+        <tr><td><strong>Shift LEFT (decrease)</strong></td><td>Non-price factor reduces demand</td><td>Entire curve moves LEFT</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="concept-card">
+    <h3>Non-Price Determinants (Shift the Curve)</h3>
+    <table class="data-table">
+      <thead><tr><th>Determinant</th><th>Demand Increases When…</th></tr></thead>
+      <tbody>
+        <tr><td>Real Income</td><td>Income rises (normal goods); income falls (inferior goods)</td></tr>
+        <tr><td>Number of Buyers</td><td>More consumers enter the market</td></tr>
+        <tr><td>Tastes & Preferences</td><td>Trend or fashion favours the good</td></tr>
+        <tr><td>Expectations</td><td>Consumers expect future prices to rise</td></tr>
+        <tr><td>Price of Substitutes</td><td>Price of a substitute good rises</td></tr>
+        <tr><td>Price of Complements</td><td>Price of a complementary good falls</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 3: SUPPLY ── -->
+<section class="section" id="step3">
+  <div class="section-header">
+    <div class="step-badge">3</div>
+    <h2 class="section-title">Supply — What Producers Do</h2>
+  </div>
+  <div class="big-idea">
+    <p><strong>Definition:</strong> Supply is the quantity of a good or service that producers are willing and able to offer for sale at various prices, within a given time period. The profit motive drives firms to produce more at higher prices.</p>
+  </div>
+  <div class="concept-card">
+    <h3>Law of Supply</h3>
+    <p>As price rises → quantity supplied rises. As price falls → quantity supplied falls. This is a <strong>direct (positive) relationship</strong>.</p>
+  </div>
+  <div class="concept-card">
+    <h3>Factors That Shift the Supply Curve</h3>
+    <table class="data-table">
+      <thead><tr><th>Factor</th><th>Effect on Supply</th></tr></thead>
+      <tbody>
+        <tr><td>Production costs fall</td><td>Supply increases (shifts right)</td></tr>
+        <tr><td>New production technology</td><td>Supply increases</td></tr>
+        <tr><td>New producers enter the market</td><td>Market supply increases</td></tr>
+        <tr><td>Favourable weather (agriculture)</td><td>Supply increases</td></tr>
+        <tr><td>Government subsidy</td><td>Supply increases</td></tr>
+        <tr><td>Government tax</td><td>Supply decreases (shifts left)</td></tr>
+        <tr><td>Input prices rise</td><td>Supply decreases</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 4: EQUILIBRIUM ── -->
+<section class="section" id="step4">
+  <div class="section-header">
+    <div class="step-badge">4</div>
+    <h2 class="section-title">Market Equilibrium</h2>
+  </div>
+  <div class="big-idea">
+    <p><strong>Definition:</strong> Market equilibrium occurs where supply and demand curves intersect. At this price, quantity supplied = quantity demanded, and there is no pressure for price to change.</p>
+  </div>
+  <div class="concept-card">
+    <h3>Disequilibrium</h3>
+    <table class="data-table">
+      <thead><tr><th>Situation</th><th>Condition</th><th>Market Pressure</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Surplus (Excess Supply)</strong></td><td>Qs > Qd</td><td>Downward pressure on price</td><td>Price falls until equilibrium</td></tr>
+        <tr><td><strong>Shortage (Excess Demand)</strong></td><td>Qd > Qs</td><td>Upward pressure on price</td><td>Price rises until equilibrium</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="concept-card">
+    <h3>Price Controls</h3>
+    <table class="data-table">
+      <thead><tr><th>Control</th><th>Set Relative to Equilibrium</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Price Ceiling (binding)</strong></td><td>BELOW equilibrium</td><td>Creates SHORTAGE</td></tr>
+        <tr><td><strong>Price Ceiling (non-binding)</strong></td><td>ABOVE equilibrium</td><td>No effect</td></tr>
+        <tr><td><strong>Price Floor (binding)</strong></td><td>ABOVE equilibrium</td><td>Creates SURPLUS</td></tr>
+        <tr><td><strong>Price Floor (non-binding)</strong></td><td>BELOW equilibrium</td><td>No effect</td></tr>
+      </tbody>
+    </table>
+    <div class="example-box" style="margin-top:14px;">
+      <p><strong>Examples:</strong> Price Ceiling → Rent controls create housing shortages. Price Floor → Minimum wage above market wage creates unemployment (labour surplus).</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 5: TRADE ── -->
+<section class="section" id="step5">
+  <div class="section-header">
+    <div class="step-badge">5</div>
+    <h2 class="section-title">Trade — Absolute & Comparative Advantage</h2>
+  </div>
+  <div class="big-idea">
+    <p><strong>Why Trade?</strong> Even if one country is better at producing everything, trade still benefits both parties — as long as each specialises in what it produces at the lowest opportunity cost.</p>
+  </div>
+  <div class="concept-card">
+    <h3>Absolute vs Comparative Advantage</h3>
+    <table class="data-table">
+      <thead><tr><th>Concept</th><th>Definition</th><th>Key Question</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Absolute Advantage</strong></td><td>Produce MORE output per unit of input than another producer</td><td>Who produces the most?</td></tr>
+        <tr><td><strong>Comparative Advantage</strong></td><td>Produce at a LOWER OPPORTUNITY COST than another producer</td><td>Who gives up the least?</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="concept-card">
+    <h3>Worked Example — Town A vs Town B</h3>
+    <table class="data-table">
+      <thead><tr><th></th><th>Milk (litres/hr)</th><th>Bread (loaves/hr)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Town A</strong></td><td>100</td><td>25</td></tr>
+        <tr><td><strong>Town B</strong></td><td>20</td><td>10</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px;font-size:14px;"><strong>Opportunity cost of 1 loaf of bread:</strong> Town A = 4 litres of milk. Town B = 2 litres of milk.</p>
+    <p style="margin-top:8px;font-size:14px;"><strong>Comparative advantage:</strong> Town B in bread (lower OC). Town A in milk (lower OC).</p>
+    <div class="example-box" style="margin-top:12px;">
+      <p><strong>Trade price range for bread:</strong> Must trade between 2 and 4 litres of milk — between each party's opportunity cost.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 6: MICRO VS MACRO ── -->
+<section class="section" id="step6">
+  <div class="section-header">
+    <div class="step-badge">6</div>
+    <h2 class="section-title">Microeconomics vs Macroeconomics</h2>
+  </div>
+  <div class="concept-card">
+    <table class="data-table">
+      <thead><tr><th></th><th>Microeconomics</th><th>Macroeconomics</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Focus</strong></td><td>Individual markets, firms, and consumers</td><td>Entire national or global economy</td></tr>
+        <tr><td><strong>Key Variables</strong></td><td>Price, output, firm costs, market structure</td><td>GDP, inflation, unemployment, interest rates</td></tr>
+        <tr><td><strong>Policy Tools</strong></td><td>Regulation, market design</td><td>Fiscal & monetary policy</td></tr>
+        <tr><td><strong>Example</strong></td><td>Why did petrol prices rise this week?</td><td>What caused the 2008 financial crisis?</td></tr>
+      </tbody>
+    </table>
+    <div class="example-box" style="margin-top:14px;">
+      <p><strong>Remember:</strong> Micro = TREES. Macro = FOREST. Both are needed to understand the full economy.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── STEP 7: SHOCKS ── -->
+<section class="section" id="step7">
+  <div class="section-header">
+    <div class="step-badge">7</div>
+    <h2 class="section-title">Economic Shocks</h2>
+  </div>
+  <div class="big-idea">
+    <p><strong>Definition:</strong> An economic shock is an unexpected event that significantly impacts the economy — causing sudden changes in prices, output, demand, or supply.</p>
+  </div>
+  <div class="concept-card">
+    <table class="data-table">
+      <thead><tr><th>Type of Shock</th><th>What Causes It</th><th>Graph Effect</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Demand Shock (positive)</strong></td><td>Surge in consumer spending</td><td>D curve shifts RIGHT</td><td>COVID stimulus payments</td></tr>
+        <tr><td><strong>Demand Shock (negative)</strong></td><td>Loss of consumer confidence</td><td>D curve shifts LEFT</td><td>2008 financial crisis</td></tr>
+        <tr><td><strong>Supply Shock (positive)</strong></td><td>Technology breakthrough</td><td>S curve shifts RIGHT</td><td>Fracking lowering energy costs</td></tr>
+        <tr><td><strong>Supply Shock (negative)</strong></td><td>Natural disaster / war</td><td>S curve shifts LEFT</td><td>2022 Ukraine war & wheat prices</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="concept-card">
+    <h3>Expected vs Unexpected Shocks</h3>
+    <table class="data-table">
+      <thead><tr><th></th><th>Expected Shock</th><th>Unexpected Shock</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Already priced in?</strong></td><td>YES — already reflected in prices</td><td>NO — causes sudden movement</td></tr>
+        <tr><td><strong>Curve movement?</strong></td><td>No shift (pre-anticipated)</td><td>Curve shifts to new equilibrium</td></tr>
+        <tr><td><strong>Example</strong></td><td>Pre-announced fuel tax increase</td><td>Sudden oil embargo</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── KEY FORMULAS ── -->
+<section class="section">
+  <div class="section-header">
+    <div class="step-badge" style="background:var(--gold);color:var(--navy-deep);">📐</div>
+    <h2 class="section-title">Key Formulas Reference</h2>
+  </div>
+  <div class="concept-card">
+    <table class="data-table">
+      <thead><tr><th>Formula</th><th>Expression</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Economic Profit</strong></td><td>TR − Explicit Costs − Implicit Costs</td><td>Includes ALL costs</td></tr>
+        <tr><td><strong>Accounting Profit</strong></td><td>Revenue − Explicit Costs</td><td>Ignores opportunity costs</td></tr>
+        <tr><td><strong>Opportunity Cost</strong></td><td>Value of next-best alternative foregone</td><td>Not just money — time, resources</td></tr>
+        <tr><td><strong>OC of Good A (in terms of B)</strong></td><td>Units of B given up ÷ Units of A gained</td><td>From production possibilities</td></tr>
+        <tr><td><strong>Market Supply</strong></td><td>Sum of all individual firms' supply</td><td>Horizontal summation</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── QUIZ ── -->
+<section id="quiz">
+  <div class="quiz-section">
+    <div class="quiz-header">
+      <div class="quiz-label">Week 1 — Self Assessment</div>
+      <div class="quiz-title">Multiple Choice Quiz</div>
+      <div class="quiz-sub">Select one answer per question, then click Check Answer. Submit all at the end to see your score.</div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-block" id="q1">
+      <div class="q-num">Question 1 of 8</div>
+      <div class="q-text">What is the central economic problem?</div>
+      <div class="options">
+        <div class="opt" onclick="select(1,'A')"><div class="opt-letter">A</div><div class="opt-text">Sustainability</div></div>
+        <div class="opt" onclick="select(1,'B')"><div class="opt-letter">B</div><div class="opt-text">Opportunity cost</div></div>
+        <div class="opt" onclick="select(1,'C')"><div class="opt-letter">C</div><div class="opt-text">Scarcity</div></div>
+        <div class="opt" onclick="select(1,'D')"><div class="opt-letter">D</div><div class="opt-text">Profit motive</div></div>
+      </div>
+      <div class="q-feedback" id="fb1"></div>
+      <button class="check-btn" onclick="check(1,'C','Resources are limited, forcing choices about allocation — this is the fundamental economic problem.')">Check Answer</button>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-block" id="q2">
+      <div class="q-num">Question 2 of 8</div>
+      <div class="q-text">A consumer switches from butter to margarine when butter prices rise. This illustrates which effect?</div>
+      <div class="options">
+        <div class="opt" onclick="select(2,'A')"><div class="opt-letter">A</div><div class="opt-text">Substitution effect</div></div>
+        <div class="opt" onclick="select(2,'B')"><div class="opt-letter">B</div><div class="opt-text">Income effect</div></div>
+        <div class="opt" onclick="select(2,'C')"><div class="opt-letter">C</div><div class="opt-text">Diminishing marginal utility</div></div>
+        <div class="opt" onclick="select(2,'D')"><div class="opt-letter">D</div><div class="opt-text">Opportunity cost</div></div>
+      </div>
+      <div class="q-feedback" id="fb2"></div>
+      <button class="check-btn" onclick="check(2,'A','When a good\'s price rises, consumers switch to cheaper substitutes — this is the substitution effect.')">Check Answer</button>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-block" id="q3">
+      <div class="q-num">Question 3 of 8</div>
+      <div class="q-text">Town X produces 200 rice or 50 coffee per day. Town Y produces 120 rice or 60 coffee per day. Who has comparative advantage in coffee?</div>
+      <div class="options">
+        <div class="opt" onclick="select(3,'A')"><div class="opt-letter">A</div><div class="opt-text">Town X</div></div>
+        <div class="opt" onclick="select(3,'B')"><div class="opt-letter">B</div><div class="opt-text">Town Y</div></div>
+        <div class="opt" onclick="select(3,'C')"><div class="opt-letter">C</div><div class="opt-text">Neither</div></div>
+        <div class="opt" onclick="select(3,'D')"><div class="opt-letter">D</div><div class="opt-text">Both equally</div></div>
+      </div>
+      <div class="q-feedback" id="fb3"></div>
+      <button class="check-btn" onclick="check(3,'B','Town Y\'s opportunity cost of coffee = 120÷60 = 2 rice. Town X\'s = 200÷50 = 4 rice. Lower opportunity cost → comparative advantage in coffee goes to Town Y.')">Check Answer</button>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-block" id="q4">
+      <div class="q-num">Question 4 of 8</div>
+      <div class="q-text">Which of the following is a NORMATIVE economic statement?</div>
+      <div class="options">
+        <div class="opt" onclick="select(4,'A')"><div class="opt-letter">A</div><div class="opt-text">Inflation is 3%</div></div>
+        <div class="opt" onclick="select(4,'B')"><div class="opt-letter">B</div><div class="opt-text">Unemployment should be reduced</div></div>
+        <div class="opt" onclick="select(4,'C')"><div class="opt-letter">C</div><div class="opt-text">Higher prices decrease quantity demanded</div></div>
+        <div class="opt" onclick="select(4,'D')"><div class="opt-letter">D</div><div class="opt-text">Supply shifts when technology improves</div></div>
+      </div>
+      <div class="q-feedback" id="fb4"></div>
+      <button class="check-btn" onclick="check(4,'B','\"Should\" is a value judgement — that makes it normative. The others are factual, testable (positive) statements.')">Check Answer</button>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-block" id="q5">
+      <div class="q-num">Question 5 of 8</div>
+      <div class="q-text">A binding price floor (set above equilibrium) causes:</div>
+      <div class="options">
+        <div class="opt" onclick="select(5,'A')"><div class="opt-letter">A</div><div class="opt-text">Shortage</div></div>
+        <div class="opt" onclick="select(5,'B')"><div class="opt-letter">B</div><div class="opt-text">Surplus</div></div>
+        <div class="opt" onclick="select(5,'C')"><div class="opt-letter">C</div><div class="opt-text">Equilibrium</div></div>
+        <div class="opt" onclick="select(5,'D')"><div class="opt-letter">D</div><div class="opt-text">No impact on the market</div></div>
+      </div>
+      <div class="q-feedback" id="fb5"></div>
+      <button class="check-btn" onclick="check(5,'B','A binding price floor above equilibrium keeps prices artificially high → Qs > Qd → surplus. Example: minimum wage above market wage creates labour surplus.')">Check Answer</button>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-block" id="q6">
+      <div class="q-num">Question 6 of 8</div>
+      <div class="q-text">When the price of Good A rises, demand for Good B also rises. What is the relationship between A and B?</div>
+      <div class="options">
+        <div class="opt" onclick="select(6,'A')"><div class="opt-letter">A</div><div class="opt-text">Substitutes</div></div>
+        <div class="opt" onclick="select(6,'B')"><div class="opt-letter">B</div><div class="opt-text">Complements</div></div>
+        <div class="opt" onclick="select(6,'C')"><div class="opt-letter">C</div><div class="opt-text">Unrelated goods</div></div>
+        <div class="opt" onclick="select(6,'D')"><div class="opt-letter">D</div><div class="opt-text">Inferior goods</div></div>
+      </div>
+      <div class="q-feedback" id="fb6"></div>
+      <button class="check-btn" onclick="check(6,'A','When price of A rises and demand for B also rises, consumers are switching from A to B — they are substitutes (e.g. butter and margarine).')">Check Answer</button>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-block" id="q7">
+      <div class="q-num">Question 7 of 8</div>
+      <div class="q-text">An economic shock is best described as:</div>
+      <div class="options">
+        <div class="opt" onclick="select(7,'A')"><div class="opt-letter">A</div><div class="opt-text">A predictable rise in production costs</div></div>
+        <div class="opt" onclick="select(7,'B')"><div class="opt-letter">B</div><div class="opt-text">An unexpected event that significantly impacts the economy</div></div>
+        <div class="opt" onclick="select(7,'C')"><div class="opt-letter">C</div><div class="opt-text">A planned government spending programme</div></div>
+        <div class="opt" onclick="select(7,'D')"><div class="opt-letter">D</div><div class="opt-text">An anticipated market change already priced in</div></div>
+      </div>
+      <div class="q-feedback" id="fb7"></div>
+      <button class="check-btn" onclick="check(7,'B','Shocks are unexpected by definition. Expected changes are already priced into markets and do not shift the equilibrium curve.')">Check Answer</button>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-block" id="q8">
+      <div class="q-num">Question 8 of 8</div>
+      <div class="q-text">A firm's economic profit is $0. This means:</div>
+      <div class="options">
+        <div class="opt" onclick="select(8,'A')"><div class="opt-letter">A</div><div class="opt-text">It is making a loss and should shut down</div></div>
+        <div class="opt" onclick="select(8,'B')"><div class="opt-letter">B</div><div class="opt-text">It covers only explicit costs, not implicit costs</div></div>
+        <div class="opt" onclick="select(8,'C')"><div class="opt-letter">C</div><div class="opt-text">It earns normal profit — covering all costs including implicit costs</div></div>
+        <div class="opt" onclick="select(8,'D')"><div class="opt-letter">D</div><div class="opt-text">It earns accounting profit but nothing more</div></div>
+      </div>
+      <div class="q-feedback" id="fb8"></div>
+      <button class="check-btn" onclick="check(8,'C','Zero economic profit = normal profit. The firm covers ALL costs (explicit + implicit) and has no incentive to leave the industry.')">Check Answer</button>
+    </div>
+
+    <button class="submit-all" onclick="submitAll()">Submit All & See Score</button>
+    <div class="score-bar" id="scoreBar">
+      <div class="score-num" id="scoreNum">0/8</div>
+      <div class="score-label">questions correct</div>
+      <div class="score-msg" id="scoreMsg"></div>
+      <button class="retry-btn" onclick="retryQuiz()">Try Again</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="ft"><a href="../index.html">← Back to subject home</a></div>
+  <div class="ft">LB5229 · Week 1 · Economics for a Sustainable World</div>
+  <div class="ft"><a href="week2.html">Week 2 →</a></div>
+</footer>
+
+<script>
+const answers = {};
+const correct = {1:'C',2:'A',3:'B',4:'B',5:'B',6:'A',7:'B',8:'C'};
+const explanations = {};
+
+function select(q, letter) {
+  const block = document.getElementById('q'+q);
+  block.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  const opts = block.querySelectorAll('.opt');
+  const letters = ['A','B','C','D'];
+  opts.forEach((o,i) => { if(letters[i]===letter) o.classList.add('selected'); });
+  answers[q] = letter;
+}
+
+function check(q, ans, explanation) {
+  if (!answers[q]) { alert('Please select an answer first.'); return; }
+  const block = document.getElementById('q'+q);
+  const opts = block.querySelectorAll('.opt');
+  const letters = ['A','B','C','D'];
+  const fb = document.getElementById('fb'+q);
+  const btn = block.querySelector('.check-btn');
+
+  opts.forEach((o,i) => {
+    o.classList.remove('selected');
+    if (letters[i] === ans) o.classList.add('correct');
+    else if (letters[i] === answers[q] && answers[q] !== ans) o.classList.add('wrong');
+    o.style.pointerEvents = 'none';
+  });
+
+  const isCorrect = answers[q] === ans;
+  fb.className = 'q-feedback show ' + (isCorrect ? 'correct-fb' : 'wrong-fb');
+  fb.innerHTML = (isCorrect ? '✓ Correct! ' : '✗ Incorrect. Correct answer: <strong>'+ans+'</strong>. ') + explanation;
+  btn.disabled = true;
+}
+
+function submitAll() {
+  let score = 0;
+  for(let q=1;q<=8;q++){
+    if(answers[q] === correct[q]) score++;
+  }
+  const bar = document.getElementById('scoreBar');
+  bar.classList.add('show');
+  document.getElementById('scoreNum').textContent = score+'/8';
+  const pct = Math.round(score/8*100);
+  let msg = pct >= 88 ? '🏆 Excellent work — you have a strong grasp of Week 1 fundamentals!'
+           : pct >= 63 ? '👍 Good effort — review any incorrect answers before moving to Week 2.'
+           : '📚 Keep studying — revisit the sections above and try again.';
+  document.getElementById('scoreMsg').textContent = msg;
+  bar.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  for(let q=1;q<=8;q++){
+    const block = document.getElementById('q'+q);
+    block.querySelectorAll('.opt').forEach(o => {
+      o.className = 'opt';
+      o.style.pointerEvents = '';
+    });
+    const fb = document.getElementById('fb'+q);
+    fb.className = 'q-feedback';
+    fb.innerHTML = '';
+    block.querySelector('.check-btn').disabled = false;
+  }
+  document.getElementById('scoreBar').classList.remove('show');
+  window.scrollTo({top:document.getElementById('quiz').offsetTop - 40, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
